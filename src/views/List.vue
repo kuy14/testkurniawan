@@ -5,9 +5,9 @@
     <input v-model="listname" placeholder="Masukkan list" />
     <button @click="addlist">Tambah List</button>
     <h5>Data List</h5>
-    <ul id="datalist">
-      <li v-for="item in items" :key="item.name">
-        {{ item.name }}
+    <ul id="datalist" style="list-style-type: none;">
+      <li v-for="item in items" :key="item.name" style="margin-bottom: 10px;">
+        {{ item.name }} <button @click="dellist(item.id)">Hapus List</button>
       </li>
     </ul>
   </div>
@@ -22,6 +22,9 @@ export default {
       listname: "",
       items: [],
     };
+  },
+  mounted: function() {
+    this.getlist();
   },
   methods: {
     addlist() {
@@ -38,6 +41,7 @@ export default {
         .post("http://18.139.50.74:8080/checklist", bodyParameters, config)
         .then((response) => {
           alert(response.data.message);
+          this.getlist();
         })
         .catch(console.log);
     },
@@ -51,6 +55,21 @@ export default {
         .then((res) => {
           console.log(res.data.data);
           this.items = res.data.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    dellist(id) {
+      console.log(id);
+      axios
+        .delete("http://18.139.50.74:8080/checklist/" + id, {
+          headers: {
+            Authorization: `Bearer ${"eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6W119.i2OVQdxr08dmIqwP7cWOJk5Ye4fySFUqofl-w6FKbm4EwXTStfm0u-sGhDvDVUqNG8Cc7STtUJlawVAP057Jlg"}`,
+          },
+        })
+        .then(() => {
+          this.getlist();
         })
         .catch((error) => {
           console.error(error);
