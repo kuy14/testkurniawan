@@ -1,8 +1,18 @@
 <template>
   <div>
     <h1>Login</h1>
-    <input v-model="username" placeholder="username" />
-    <input v-model="password" placeholder="password" />
+    <input
+      style="margin-bottom: 10px;"
+      v-model="username"
+      placeholder="username"
+    />
+    <br />
+    <input
+      style="margin-bottom: 10px;"
+      v-model="password"
+      placeholder="password"
+    />
+    <br />
     <button @click="login()">Login</button>
   </div>
 </template>

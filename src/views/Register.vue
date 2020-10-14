@@ -1,9 +1,22 @@
 <template>
   <div>
     <h1>Register</h1>
-    <input v-model="username" placeholder="username" />
-    <input v-model="email" placeholder="email" />
-    <input v-model="password" placeholder="password" type="password" />
+    <input
+      style="margin-bottom: 10px;"
+      v-model="username"
+      placeholder="username"
+    /><br />
+    <input
+      style="margin-bottom: 10px;"
+      v-model="email"
+      placeholder="email"
+    /><br />
+    <input
+      style="margin-bottom: 10px;"
+      v-model="password"
+      placeholder="password"
+      type="password"
+    /><br />
     <button @click="register">Register</button>
   </div>
 </template>
